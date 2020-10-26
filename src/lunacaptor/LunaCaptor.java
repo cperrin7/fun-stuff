@@ -189,9 +189,9 @@ public class LunaCaptor {
 	 */
 	public void drawPlayer(double yBegin, double yEnd, boolean right) {
 		//pixel art of girl with bug net
-		String filename = "taingstuff/lunacaptor/sprite_left.png";
+		String filename = "lunacaptor/sprite_left.png";
 		if(right) {
-			filename = "taingstuff/lunacaptor/sprite_right.png";
+			filename = "lunacaptor/sprite_right.png";
 		}
 		StdDraw.picture(this.playerLoc*this.unitX+this.unitX/2, yBegin+(yEnd-yBegin)/2, filename, this.unitX-(this.unitX/10), this.unitY-this.unitY/10);
 	}

@@ -43,6 +43,7 @@ public class Game {
 		int time = 0;
 		while(true) {
 			if(game.checkEndGame()) {
+				//FIX ME: this didn't work
 				break;
 			}
 			StdDraw.clear();
