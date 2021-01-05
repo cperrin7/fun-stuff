@@ -11,3 +11,5 @@
 ## receiptCharges
  code to calculate what your friends owe you after a restaurant trip
  
+## houseDistance
+ calculates the distance between two houses given their addresses, by using html from a google maps link of that location to get the latitude and longitude
