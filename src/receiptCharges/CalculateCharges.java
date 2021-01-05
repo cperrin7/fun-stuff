@@ -54,13 +54,13 @@ public class CalculateCharges {
 	 */
 	public static void priceFees(HashMap<String,Double> people, String[] args) {
 		ArgsProcessor ap = new ArgsProcessor(args);
-		double feePrice = ap.nextDouble("Input the price of a fee/tax/etc. (or 0 if no more fees)");
+		double feePrice = ap.nextDouble("Input the price of a fee/tax/discount/etc. (or 0 if no more fees)");
 		while(feePrice!=0.0) {
 			double feePerPerson = feePrice/people.size();
 			for(String person : people.keySet()) {
 				people.put(person, people.get(person)+feePerPerson);
 			}
-			feePrice = ap.nextDouble("Input the price of a fee/tax/etc. (or 0 if no more fees)");
+			feePrice = ap.nextDouble("Input the price of a fee/tax/discount//etc. (or 0 if no more fees)");
 		}
 	}
 

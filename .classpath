@@ -8,5 +8,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/CKPer/git/cse131-s18-students-cperrin/jars/jsoup-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
