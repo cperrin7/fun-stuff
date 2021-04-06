@@ -14,8 +14,8 @@ public class DessoffSummary {
 	 * @param compInput
 	 * @return
 	 */
-	public static Map<Composer,Double> loadComposers(In compInput){
-		Map<Composer,Double> composers = new HashMap<Composer,Double>();
+	public static Map<Composer,Integer> loadComposers(In compInput){
+		Map<Composer,Integer> composers = new HashMap<Composer,Integer>();
 		compInput.readLine();//first line is titles, skip it
 		while(compInput.hasNextLine()) {
 			String line = compInput.readLine();
@@ -32,6 +32,7 @@ public class DessoffSummary {
 				fifthcomma = line.indexOf(",", fourthcomma+1);
 				composer = line.substring(fourthcomma+1, fifthcomma);
 			}
+			composer = composer.trim();
 			int sixthcomma = line.indexOf(",", fifthcomma+1);
 			String nationality = line.substring(fifthcomma+1, sixthcomma);
 			int seventhcomma = line.indexOf(",", sixthcomma+1);
@@ -44,13 +45,23 @@ public class DessoffSummary {
 				notes = line.substring(eightcomma+1, line.length()-1);
 			}
 			Composer c = new Composer(composer, nationality, musicType, years, notes);
-			composers.put(c, composers.getOrDefault(c, 0.0)+1);
+			if(composers.containsKey(c)) {
+				composers.replace(c, composers.get(c)+1);
+			}
+			else {
+				composers.put(c, 1);
+			}
 		}
 		
 		return composers;
 	}
 	
-	public static void exportToFile(String filename, Map<Composer,Double> composers) {
+	/**
+	 * export the composer counts to a file
+	 * @param filename
+	 * @param composers
+	 */
+	public static void exportToFile(String filename, Map<Composer,Integer> composers) {
 		Out file = new Out(filename);
 		String output = "Composer,Times Programmed\n";
 		for(Composer c : composers.keySet()) {
@@ -65,10 +76,17 @@ public class DessoffSummary {
 		//code to summarize the composers Dessoff chose
 		String programmingName = "C:/Users/CKPer/Box/WashU/D_Senior Spring Semester/Music Hist 3/Paper/Programming.csv";
 		In programming = new In(programmingName);
-		Map<Composer,Double> composers = loadComposers(programming);
+		Map<Composer,Integer> composers = loadComposers(programming);
+		int max = 0;
+		Composer maxC = null;
 		for(Composer c : composers.keySet()) {
+			if(composers.get(c)>max) {
+				max = composers.get(c);
+				maxC = c;
+			}
 			System.out.println(c.getName()+": "+composers.get(c));
 		}
+		System.out.println("The composer most performed is "+maxC.getName()+", and was programmed "+max+" times");
 		String outFile = "C:/Users/CKPer/Box/WashU/D_Senior Spring Semester/Music Hist 3/Paper/Programming_composer counts.csv";
 		exportToFile(outFile, composers);
 		System.out.println("done");
